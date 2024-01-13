@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class homePage extends StatefulWidget{
+class MapPage extends StatefulWidget{
   @override
-  _homePageState createState() => _homePageState();
+  _MapPageState createState() => _MapPageState();
 }
 
-class _homePageState extends State<homePage>{
+class _MapPageState extends State<MapPage>{
   @override
   Widget build(BuildContext context){
     return Scaffold(
@@ -14,7 +14,8 @@ class _homePageState extends State<homePage>{
         centerTitle: true,
         backgroundColor: Colors.blueGrey,
         foregroundColor: Colors.white,
-        title: Text('Wu Store'),
+        title: Text('Map'),
+        elevation: 0.0,
       ),
     );
   }

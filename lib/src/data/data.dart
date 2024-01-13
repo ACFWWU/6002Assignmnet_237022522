@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class homePage extends StatefulWidget{
+class DataList extends StatefulWidget{
   @override
-  _homePageState createState() => _homePageState();
+  _dataListState createState() => _dataListState();
 }
 
-class _homePageState extends State<homePage>{
+class _dataListState extends State<DataList>{
   @override
   Widget build(BuildContext context){
     return Scaffold(
@@ -14,7 +14,7 @@ class _homePageState extends State<homePage>{
         centerTitle: true,
         backgroundColor: Colors.blueGrey,
         foregroundColor: Colors.white,
-        title: Text('Wu Store'),
+        title: Text('Data List'),
       ),
     );
   }
