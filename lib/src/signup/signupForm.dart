@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/src/db/constant.dart';
 import 'package:flutter_application_1/src/signup/models/signupModel.dart';
+import 'package:http/http.dart' as http;
 
 class signupForm extends StatefulWidget{
   @override
@@ -11,11 +13,27 @@ class _signupFormState extends State<signupForm>{
   signupModel formData = signupModel();
   //bool validateTextField = false;
 
+  void singup() async{
+    var  regBody = {
+      'name': formData.name,
+      'password': formData.password,
+    };
+
+    var response = await http.post(Uri.parse(MONGO_DB_URL),
+    headers: {'Content-Type': 'application/json'},
+    body: regBody);
+
+    print(response);
+  } 
+
   void submitForm(){
     if(_formKey.currentState!.validate()){
       _formKey.currentState!.save();
       print('Name: ${formData.name}');
       print('Password: ${formData.password}');
+
+      singup();
+      
     }
   }
 

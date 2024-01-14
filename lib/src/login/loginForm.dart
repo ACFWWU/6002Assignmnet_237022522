@@ -9,13 +9,17 @@ class LoginForm extends StatefulWidget{
 class _LoginFormState extends State<LoginForm>{
   final _formKey = GlobalKey<FormState>(); //for validation
   loginModel formData = loginModel();
-  //bool validateTextField = false;
+  bool validateTextField = false;
 
   void submitForm(){
     if(_formKey.currentState!.validate()){
       _formKey.currentState!.save();
       print('Name: ${formData.name}');
       print('Password: ${formData.password}');
+    } else {
+      setState(() {
+        validateTextField = true;
+      });
     }
   }
 
@@ -40,7 +44,7 @@ class _LoginFormState extends State<LoginForm>{
       child: Column(
         children:<Widget>[
           TextFormField( //for username
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               labelText: "Username",
               hintText: "Enter your username",
               helperText: '',
@@ -48,10 +52,11 @@ class _LoginFormState extends State<LoginForm>{
         onSaved: (value){ //save the value to the model for login
           formData.name = value!;
         },
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         validator: validateUserName, //validate the username
       ),
           TextFormField( //for password
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               labelText: "Password",
               hintText: "Enter your password",
               helperText: '',
@@ -63,7 +68,7 @@ class _LoginFormState extends State<LoginForm>{
         obscureText: true,
       ),
       Container( //for login button
-        padding: EdgeInsets.only(
+        padding: const EdgeInsets.only(
           top: 20.0,
         ),
         width: double.infinity,

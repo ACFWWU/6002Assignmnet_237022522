@@ -19,6 +19,14 @@ class _signupPageState extends State<signupPage>{
           padding: EdgeInsets.all(30.0),
           child: Column(
             children: <Widget>[
+              //add title text
+              Text(
+                'Sign Up',
+                style: TextStyle(
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
               Logo(),
               signupForm(),
             ],
