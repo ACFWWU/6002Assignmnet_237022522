@@ -12,8 +12,8 @@ class _ProfileState extends State<Profile>{
   Widget build(BuildContext context){
     return Scaffold(
       //show login page
-      body: loginPage(),
-      //body: signupPage(),
+      //body: loginPage(),
+      body: signupPage(),
 
 
       // appBar: AppBar(

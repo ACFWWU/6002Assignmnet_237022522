@@ -4,7 +4,7 @@ import 'package:flutter_application_1/src/db/mongoDB.dart';
 import 'package:flutter_application_1/src/signup/models/signupModel.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
+import 'package:flutter_application_1/src/login/login.dart';
 import 'package:mongo_dart/mongo_dart.dart' as mongo;
 
 
@@ -40,6 +40,13 @@ class _signupFormState extends State<signupForm>{
       
     }
   }
+
+  void _goToLoginPage(BuildContext context) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => loginPage()),
+  );
+}
 
   String validateUserName(String? value){    
     if(value!.isEmpty){
@@ -128,7 +135,9 @@ class _signupFormState extends State<signupForm>{
                   color: Colors.black87,
                  ), 
           ),
-          onPressed: (){},
+          onPressed: (){
+            _goToLoginPage(context);
+          },
           //set the button color be purple
           style: TextButton.styleFrom(
             primary: Colors.white,

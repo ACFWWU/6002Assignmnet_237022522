@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/src/login/models/loginModel.dart';
+import 'package:flutter_application_1/src/signup/signup.dart';
 
 class LoginForm extends StatefulWidget{
   @override
@@ -22,6 +23,13 @@ class _LoginFormState extends State<LoginForm>{
       });
     }
   }
+
+  void _goToSignupPage(BuildContext context) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => signupPage()),
+  );
+}
 
   String validateUserName(String? value){    
     if(value!.isEmpty){
@@ -95,7 +103,10 @@ class _LoginFormState extends State<LoginForm>{
                   color: Colors.black87,
                  ), 
           ),
-          onPressed: (){},
+          //when presse the button go to the signup page
+
+          onPressed: (){
+            _goToSignupPage(context);},
           //set the button color be purple
           style: TextButton.styleFrom(
             primary: Colors.white,
