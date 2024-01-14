@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/src/db/constant.dart';
 import 'package:flutter_application_1/src/db/mongoDB.dart';
@@ -22,27 +24,21 @@ class _signupFormState extends State<signupForm>{
   //bool validateTextField = false;
   signupService _signupService = signupService();
 
-
-  // void singup() async{
-  //   var database = await mongo.Db.create(MONGO_DB_URL);
-  //   await database.open();
-  //   var collection = database.collection(MONGO_DB_NAME);
-  //   await collection.insert({
-  //     'name': formData.name,
-  //     'password': formData.password,
-  //   });
-  //   print(await collection.find().toList());
-    
-  // } 
-
-  void submitForm(){
+  Future<void> submitForm() async {
     if(_formKey.currentState!.validate()){
       _formKey.currentState!.save();
       print('Name: ${formData.name}');
       print('Password: ${formData.password}');
+      bool nameExisted = await _signupService.checkInput(formData);
 
+      if(nameExisted == false){
       _signupService.singup(formData);
-      
+
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Welcome ${formData.name} your account is create'),),);
+    }else if(nameExisted==true){
+      //show the snackbar
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('This user already exists'),),);
+    }
     }
   }
 

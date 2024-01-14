@@ -105,8 +105,7 @@ class _LoginFormState extends State<LoginForm>{
           ),
           //when presse the button go to the signup page
 
-          onPressed: (){
-            _goToSignupPage(context);},
+          onPressed: (){_goToSignupPage(context);},
           //set the button color be purple
           style: TextButton.styleFrom(
             primary: Colors.white,
