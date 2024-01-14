@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/src/app.dart';
 import 'package:flutter_application_1/src/login/models/loginModel.dart';
+import 'package:flutter_application_1/src/login/provider/loginService.dart';
 import 'package:flutter_application_1/src/signup/signup.dart';
+import 'package:provider/provider.dart';
 
 class LoginForm extends StatefulWidget{
   @override
@@ -10,19 +13,34 @@ class LoginForm extends StatefulWidget{
 class _LoginFormState extends State<LoginForm>{
   final _formKey = GlobalKey<FormState>(); //for validation
   loginModel formData = loginModel();
-  bool validateTextField = false;
+  //bool validateTextField = false;
+  loginService _loginService = loginService();
 
-  void submitForm(){
+  Future<void> submitForm() async {
     if(_formKey.currentState!.validate()){
       _formKey.currentState!.save();
       print('Name: ${formData.name}');
       print('Password: ${formData.password}');
-    } else {
-      setState(() {
-        validateTextField = true;
-      });
+      bool nameExisted = await _loginService.login(formData);
+      if(nameExisted == true){
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Welcome ${formData.name} your account is create'),),);
+        _goToMainPage(context);
+      }else if(nameExisted==false){
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('This username or password wrong'),),);
     }
+    // } else {
+    //   setState(() {
+    //     validateTextField = true;
+    //   });
+    // }
   }
+  }
+
+  void _goToMainPage(BuildContext context) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => App()),
+  );}
 
   void _goToSignupPage(BuildContext context) {
   Navigator.push(
@@ -47,6 +65,7 @@ class _LoginFormState extends State<LoginForm>{
 
   @override
   Widget build(BuildContext context){
+
     return Form(
       key: _formKey, //for validation
       child: Column(
@@ -57,11 +76,15 @@ class _LoginFormState extends State<LoginForm>{
               hintText: "Enter your username",
               helperText: '',
         ),
-        onSaved: (value){ //save the value to the model for login
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Please enter your username';
+          }
+          return null;
+        
+        },onSaved: (value){ //save the value to the model for login
           formData.name = value!;
         },
-        autovalidateMode: AutovalidateMode.onUserInteraction,
-        validator: validateUserName, //validate the username
       ),
           TextFormField( //for password
             decoration: const InputDecoration(
@@ -69,12 +92,16 @@ class _LoginFormState extends State<LoginForm>{
               hintText: "Enter your password",
               helperText: '',
         ),
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Please enter your password';
+          }
+          return null;
+        },
         onSaved: (value){ //save the value to the model for login
           formData.password = value!;
         },
         autovalidateMode: AutovalidateMode.onUserInteraction,
-        validator: validatePassword, //validate the password
-        obscureText: true,
       ),
       Container( //for login button
         padding: const EdgeInsets.only(
@@ -104,7 +131,6 @@ class _LoginFormState extends State<LoginForm>{
                  ), 
           ),
           //when presse the button go to the signup page
-
           onPressed: (){_goToSignupPage(context);},
           //set the button color be purple
           style: TextButton.styleFrom(

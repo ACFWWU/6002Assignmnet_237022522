@@ -1,10 +1,9 @@
 import 'dart:ffi';
-
+import 'package:flutter_application_1/src/app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/src/db/constant.dart';
 import 'package:flutter_application_1/src/db/mongoDB.dart';
 import 'package:flutter_application_1/src/signup/models/signupModel.dart';
-import 'package:flutter_application_1/src/signup/provider/signupService.dart';
 import 'package:flutter_application_1/src/signup/provider/signupService.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -30,17 +29,23 @@ class _signupFormState extends State<signupForm>{
       print('Name: ${formData.name}');
       print('Password: ${formData.password}');
       bool nameExisted = await _signupService.checkInput(formData);
-
       if(nameExisted == false){
       _signupService.singup(formData);
 
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Welcome ${formData.name} your account is create'),),);
+      _goToMainPage(context);
     }else if(nameExisted==true){
       //show the snackbar
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('This user already exists'),),);
     }
     }
   }
+
+void _goToMainPage(BuildContext context) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => App()),
+  );}
 
   void _goToLoginPage(BuildContext context) {
   Navigator.push(
@@ -87,9 +92,7 @@ class _signupFormState extends State<signupForm>{
         },//validate the username
         onSaved: (value){ //save the value to the model for signup
           formData.name = value!;
-        },
-         //validator: validateTextField, //validate the username
-          
+        },          
       ),
           TextFormField( //for password
             decoration: InputDecoration(
