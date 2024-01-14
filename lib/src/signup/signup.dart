@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_application_1/src/signup/provider/signupService.dart';
 import 'package:flutter_application_1/src/signup/signupForm.dart';
 import 'package:flutter_application_1/src/logo.dart';
+import 'package:provider/provider.dart';
 
 class signupPage extends StatefulWidget{
   @override
@@ -13,7 +15,9 @@ class _signupPageState extends State<signupPage>{
   Widget build(BuildContext context){
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);//for status bar icon color
 
-    return Scaffold(
+   return Provider(
+    create: (BuildContext context) => signupService(),
+    child: Scaffold(
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.all(30.0),
@@ -33,6 +37,6 @@ class _signupPageState extends State<signupPage>{
           ),
         ),
       ),
-    );
+    ));
   }
 }

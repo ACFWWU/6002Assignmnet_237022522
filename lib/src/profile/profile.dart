@@ -15,7 +15,6 @@ class _ProfileState extends State<Profile>{
       //body: loginPage(),
       body: signupPage(),
 
-
       // appBar: AppBar(
       //   //show the tittle in  middle of appbar
       //   centerTitle: true,

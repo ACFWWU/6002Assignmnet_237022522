@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/src/db/constant.dart';
 import 'package:flutter_application_1/src/db/mongoDB.dart';
 import 'package:flutter_application_1/src/signup/models/signupModel.dart';
+import 'package:flutter_application_1/src/signup/provider/signupService.dart';
+import 'package:flutter_application_1/src/signup/provider/signupService.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter_application_1/src/login/login.dart';
 import 'package:mongo_dart/mongo_dart.dart' as mongo;
+import 'package:provider/provider.dart';
 
 
 class signupForm extends StatefulWidget{
@@ -17,18 +20,20 @@ class _signupFormState extends State<signupForm>{
   final _formKey = GlobalKey<FormState>(); //for validation
   signupModel formData = signupModel();
   //bool validateTextField = false;
+  signupService _signupService = signupService();
 
-  void singup() async{
-    var database = await mongo.Db.create(MONGO_DB_URL);
-    await database.open();
-    var collection = database.collection(MONGO_DB_NAME);
-    await collection.insert({
-      'name': formData.name,
-      'password': formData.password,
-    });
-    print(await collection.find().toList());
+
+  // void singup() async{
+  //   var database = await mongo.Db.create(MONGO_DB_URL);
+  //   await database.open();
+  //   var collection = database.collection(MONGO_DB_NAME);
+  //   await collection.insert({
+  //     'name': formData.name,
+  //     'password': formData.password,
+  //   });
+  //   print(await collection.find().toList());
     
-  } 
+  // } 
 
   void submitForm(){
     if(_formKey.currentState!.validate()){
@@ -36,7 +41,7 @@ class _signupFormState extends State<signupForm>{
       print('Name: ${formData.name}');
       print('Password: ${formData.password}');
 
-      singup();
+      _signupService.singup(formData);
       
     }
   }
@@ -64,6 +69,8 @@ class _signupFormState extends State<signupForm>{
 
   @override
   Widget build(BuildContext context){
+    _signupService = Provider.of<signupService>(context);
+
     return Form(
       key: _formKey, //for validation
       autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -99,8 +106,6 @@ class _signupFormState extends State<signupForm>{
             return 'Please enter your password';
           }
           return null;
-        
-        
         },//validate the password
         onSaved: (value){ //save the value to the model for signup
           formData.password = value!;
