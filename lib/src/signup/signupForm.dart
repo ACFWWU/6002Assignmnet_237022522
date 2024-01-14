@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/src/db/constant.dart';
+import 'package:flutter_application_1/src/db/mongoDB.dart';
 import 'package:flutter_application_1/src/signup/models/signupModel.dart';
 import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+import 'package:mongo_dart/mongo_dart.dart' as mongo;
+
 
 class signupForm extends StatefulWidget{
   @override
@@ -14,16 +19,15 @@ class _signupFormState extends State<signupForm>{
   //bool validateTextField = false;
 
   void singup() async{
-    var  regBody = {
+    var database = await mongo.Db.create(MONGO_DB_URL);
+    await database.open();
+    var collection = database.collection(MONGO_DB_NAME);
+    await collection.insert({
       'name': formData.name,
       'password': formData.password,
-    };
-
-    var response = await http.post(Uri.parse(MONGO_DB_URL),
-    headers: {'Content-Type': 'application/json'},
-    body: regBody);
-
-    print(response);
+    });
+    print(await collection.find().toList());
+    
   } 
 
   void submitForm(){
@@ -55,6 +59,7 @@ class _signupFormState extends State<signupForm>{
   Widget build(BuildContext context){
     return Form(
       key: _formKey, //for validation
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       child: Column(
         children:<Widget>[
           TextFormField( //for username
@@ -63,10 +68,18 @@ class _signupFormState extends State<signupForm>{
               hintText: "Enter your username",
               helperText: '',
         ),
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Please enter your username';
+          }
+          return null;
+        
+        },//validate the username
         onSaved: (value){ //save the value to the model for signup
           formData.name = value!;
         },
-        validator: validateUserName, //validate the username
+         //validator: validateTextField, //validate the username
+          
       ),
           TextFormField( //for password
             decoration: InputDecoration(
@@ -74,11 +87,19 @@ class _signupFormState extends State<signupForm>{
               hintText: "Enter your password",
               helperText: '',
         ),
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Please enter your password';
+          }
+          return null;
+        
+        
+        },//validate the password
         onSaved: (value){ //save the value to the model for signup
           formData.password = value!;
         },
-        validator: validatePassword, //validate the password
-        obscureText: true,
+         
+        //obscureText: true,
       ),
       Container( //for signup button
         padding: EdgeInsets.only(

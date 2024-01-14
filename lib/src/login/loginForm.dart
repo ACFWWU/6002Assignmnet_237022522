@@ -64,6 +64,7 @@ class _LoginFormState extends State<LoginForm>{
         onSaved: (value){ //save the value to the model for login
           formData.password = value!;
         },
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         validator: validatePassword, //validate the password
         obscureText: true,
       ),

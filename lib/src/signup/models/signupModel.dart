@@ -1,4 +1,4 @@
 class signupModel {
-  late String name ; //for username
-  late String password ;
+   String name ='' ; //for username
+   String password ='';
   }
