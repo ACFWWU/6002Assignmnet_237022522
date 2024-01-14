@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_application_1/src/login/loginForm.dart';
+import 'package:flutter_application_1/src/signup/signupForm.dart';
 import 'package:flutter_application_1/src/logo.dart';
 
-class loginPage extends StatefulWidget{
+class signupPage extends StatefulWidget{
   @override
-  _loginPageState createState() => _loginPageState();
+  _signupPageState createState() => _signupPageState();
 }
 
-class _loginPageState extends State<loginPage>{
+class _signupPageState extends State<signupPage>{
   @override
   Widget build(BuildContext context){
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);//for status bar icon color
@@ -20,7 +20,7 @@ class _loginPageState extends State<loginPage>{
           child: Column(
             children: <Widget>[
               Logo(),
-              LoginForm(),
+              signupForm(),
             ],
           ),
         ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/src/login/login.dart';
+import 'package:flutter_application_1/src/signup/signup.dart';
 
 class Profile extends StatefulWidget{
   @override
@@ -11,7 +12,8 @@ class _ProfileState extends State<Profile>{
   Widget build(BuildContext context){
     return Scaffold(
       //show login page
-      body: loginPage(),
+       body: loginPage(),
+      //body: signupPage(),
 
 
       // appBar: AppBar(

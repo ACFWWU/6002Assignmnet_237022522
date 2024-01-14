@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/src/login/models/loginModel.dart';
+import 'package:flutter_application_1/src/signup/models/signupModel.dart';
 
-class LoginForm extends StatefulWidget{
+class signupForm extends StatefulWidget{
   @override
-  _LoginFormState createState() => _LoginFormState();
+  _signupFormState createState() => _signupFormState();
 }
 
-class _LoginFormState extends State<LoginForm>{
+class _signupFormState extends State<signupForm>{
   final _formKey = GlobalKey<FormState>(); //for validation
-  loginModel formData = loginModel();
+  signupModel formData = signupModel();
   //bool validateTextField = false;
 
   void submitForm(){
@@ -45,7 +45,7 @@ class _LoginFormState extends State<LoginForm>{
               hintText: "Enter your username",
               helperText: '',
         ),
-        onSaved: (value){ //save the value to the model for login
+        onSaved: (value){ //save the value to the model for signup
           formData.name = value!;
         },
         validator: validateUserName, //validate the username
@@ -56,19 +56,19 @@ class _LoginFormState extends State<LoginForm>{
               hintText: "Enter your password",
               helperText: '',
         ),
-        onSaved: (value){ //save the value to the model for login
+        onSaved: (value){ //save the value to the model for signup
           formData.password = value!;
         },
         validator: validatePassword, //validate the password
         obscureText: true,
       ),
-      Container( //for login button
+      Container( //for signup button
         padding: EdgeInsets.only(
           top: 20.0,
         ),
         width: double.infinity,
         child: ElevatedButton(
-          child: Text('Login',
+          child: Text('Create Account',
                  style: TextStyle(
                   color: Colors.white60,
                  ), 
@@ -84,7 +84,7 @@ class _LoginFormState extends State<LoginForm>{
       Container( //for sign buttom
         width: double.infinity,
         child: TextButton(
-          child: Text('Sign Up',
+          child: Text('Already have an account? Login',
                  style: TextStyle(
                   color: Colors.black87,
                  ), 

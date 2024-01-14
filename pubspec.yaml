@@ -31,6 +31,7 @@ dependencies:
   flutter:
     sdk: flutter
   provider: ^6.1.1 #add for the currentPage
+  mongo_dart: ^0.10.0 #for using mongoDB
 
 
   # The following adds the Cupertino Icons font to your application.
