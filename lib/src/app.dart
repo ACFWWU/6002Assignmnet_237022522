@@ -21,9 +21,11 @@ class App extends StatefulWidget{
 class _AppState extends State<App>{
   @override
   Widget build(BuildContext context) {
+    
     return MaterialApp(
       // ...
-      home: Consumer<AuthProvider>(
+      home: 
+      Consumer<AuthProvider>(
         builder: (context, authProvider, _) {
           if (authProvider.isLoggedIn == true) {
             // User is logged in, show authenticated content

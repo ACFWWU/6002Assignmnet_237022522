@@ -31,8 +31,9 @@ class _LoginFormState extends State<LoginForm>{
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Welcome ${formData.name} '),),);
         localStorage().writeSecureData('name',formData.name);
       print('is true');
-      authProvider.login();
+      
       _goToMainPage(context);
+      authProvider.login();
       }else if(nameExisted==false){
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('This username or password wrong'),),);
       print('is false');
