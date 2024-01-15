@@ -30,11 +30,21 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  provider: ^6.1.1 #add for the currentPage
+  mongo_dart: ^0.10.0 #for using mongoDB
+  http: ^0.13.4
+  shared_preferences: ^2.0.16
+  flutter_secure_storage: ^9.0.0 #for local storage
+  google_maps_flutter: ^2.5.3 #for google map
+ 
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  shake: ^2.2.0
+  sensors: ^2.0.3
+  geolocator: ^10.1.0
+  image_picker: ^1.0.7
 
 dev_dependencies:
   flutter_test:
@@ -57,6 +67,8 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  assets:
+  - image/ #for the app logo
 
   # To add assets to your application, add an assets section, like this:
   # assets:
