@@ -13,6 +13,8 @@ class Profile extends StatefulWidget{
 }
 
 class _ProfileState extends State<Profile>{
+
+  
 Future<String?> getData() async{
   String? value = await  FlutterSecureStorage().read(key: 'name');
   // Use the 'value' string here
@@ -37,7 +39,7 @@ Future<String?> getData() async{
       //if the user login show the user name and logout button
       //if the user not login show the login and signup button
       appBar: AppBar(
-        title: Text('Profile ${getData()}'),
+        title: Text('Profile'),
         centerTitle: true,
         backgroundColor: Colors.blueGrey,
         foregroundColor: Colors.white,
@@ -47,8 +49,17 @@ Future<String?> getData() async{
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            // Text('Welcome ${localStorage().readSecureData('name')}'),
-            Text('Welcome ${getData().toString()}'),
+            FutureBuilder<String?>(
+              future: getData(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return Text('Welcome ${snapshot.data}');
+                } else {
+                  return Text('Loading...');
+                }
+              },
+            ),
+            //Text('Welcome ${localStorage().readSecureData('name')}'),
             ElevatedButton(
               onPressed: () {
                 localStorage().deleteSecureData('name');
