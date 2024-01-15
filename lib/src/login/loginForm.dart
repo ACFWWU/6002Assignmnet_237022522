@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/src/app.dart';
+import 'package:flutter_application_1/src/auth/authProvider.dart';
+import 'package:flutter_application_1/src/localStroage/localStroage.dart';
+import 'package:flutter_application_1/src/localStroage/local_storage_ss.dart';
 import 'package:flutter_application_1/src/login/models/loginModel.dart';
 import 'package:flutter_application_1/src/login/provider/loginService.dart';
 import 'package:flutter_application_1/src/signup/signup.dart';
@@ -15,18 +18,25 @@ class _LoginFormState extends State<LoginForm>{
   loginModel formData = loginModel();
   //bool validateTextField = false;
   loginService _loginService = loginService();
-
+  AuthProvider authProvider = AuthProvider();
+  
   Future<void> submitForm() async {
     if(_formKey.currentState!.validate()){
       _formKey.currentState!.save();
       print('Name: ${formData.name}');
       print('Password: ${formData.password}');
       bool nameExisted = await _loginService.login(formData);
+
       if(nameExisted == true){
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Welcome ${formData.name} your account is create'),),);
-        _goToMainPage(context);
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Welcome ${formData.name} '),),);
+        localStorage().writeSecureData('name',formData.name);
+      print('is true');
+      authProvider.login();
+      _goToMainPage(context);
       }else if(nameExisted==false){
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('This username or password wrong'),),);
+      print('is false');
+      
     }
     // } else {
     //   setState(() {

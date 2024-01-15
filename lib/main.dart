@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/src/app.dart';
+import 'package:flutter_application_1/src/auth/authProvider.dart';
 import 'package:flutter_application_1/src/db/mongoDB.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await MongoDB.connect();
-  
-  runApp(App());
+  runApp(
+    ChangeNotifierProvider(create: (_)=>AuthProvider(),
+    child: App(),
+    ),
+    );
 }
 
 // class MyApp extends StatelessWidget {

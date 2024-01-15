@@ -33,6 +33,8 @@ dependencies:
   provider: ^6.1.1 #add for the currentPage
   mongo_dart: ^0.10.0 #for using mongoDB
   http: ^0.13.4
+  shared_preferences: ^2.0.16
+  flutter_secure_storage: ^9.0.0 #for local storage
 
 
   # The following adds the Cupertino Icons font to your application.

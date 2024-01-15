@@ -1,8 +1,11 @@
 import 'dart:ffi';
 import 'package:flutter_application_1/src/app.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/src/auth/authProvider.dart';
 import 'package:flutter_application_1/src/db/constant.dart';
 import 'package:flutter_application_1/src/db/mongoDB.dart';
+import 'package:flutter_application_1/src/localStroage/localStroage.dart';
+import 'package:flutter_application_1/src/localStroage/local_storage_ss.dart';
 import 'package:flutter_application_1/src/signup/models/signupModel.dart';
 import 'package:flutter_application_1/src/signup/provider/signupService.dart';
 import 'package:http/http.dart' as http;
@@ -22,6 +25,7 @@ class _signupFormState extends State<signupForm>{
   signupModel formData = signupModel();
   //bool validateTextField = false;
   signupService _signupService = signupService();
+  AuthProvider authProvider = AuthProvider();
 
   Future<void> submitForm() async {
     if(_formKey.currentState!.validate()){
@@ -31,8 +35,10 @@ class _signupFormState extends State<signupForm>{
       bool nameExisted = await _signupService.checkInput(formData);
       if(nameExisted == false){
       _signupService.singup(formData);
-
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Welcome ${formData.name} your account is create'),),);
+      localStorage().writeSecureData('name',formData.name);
+      LocalStorageSS().saveString('name', formData.name);
+      authProvider.login();
       _goToMainPage(context);
     }else if(nameExisted==true){
       //show the snackbar
