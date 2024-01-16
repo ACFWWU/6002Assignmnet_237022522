@@ -45,7 +45,8 @@ class _AppState extends State<App>{
           children: <Widget>[
             homePage(),
             DataList(),
-            MapPage(),
+            //locationPage(),
+            //MapPage(),
             Profile(),
           ],
         ),

@@ -33,7 +33,7 @@ class _dataListState extends State<DataList>{
             children: [
               Icon(Icons.restaurant_menu),
               SizedBox(width: 10),
-              Text('Food Recipe')
+              Text('Food List')
             ],
           ),
         ),

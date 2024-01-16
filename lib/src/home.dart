@@ -27,7 +27,7 @@ class _home extends State<home>{
             homePage(),
             DataList(),
             //MapPage(),
-            SearchPartnersView(),
+            //locationPage(),
             Profile(),
           ],
         ),

@@ -31,15 +31,16 @@ class nvgBar extends StatelessWidget{
             backgroundColor: Colors.blueGrey,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart),
-            label: 'Cart',
+            icon: Icon(Icons.food_bank_outlined),
+            label: 'Food',
             backgroundColor: Colors.blueGrey,
           ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.map_outlined),
+          //   label: 'Map',
+          //   backgroundColor: Colors.blueGrey,
+          // ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.map_outlined),
-            label: 'Map',
-            backgroundColor: Colors.blueGrey,
-          ),BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: 'Profile',
             backgroundColor: Colors.blueGrey,
