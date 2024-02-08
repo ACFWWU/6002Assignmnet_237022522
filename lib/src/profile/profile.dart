@@ -27,7 +27,7 @@ Future<String?> getData() async{
   }
   _checkLogin() async{
     //await localStorage().readSecureData('name');
-    if(AuthProvider().isLoggedIn == true){
+    if(AuthProvider().isLoggedIn == false){
     setState(() {builder: (context) => loginPage();});}
   }
 

@@ -55,20 +55,27 @@ class _MapPageState extends State<MapPage>{
 Future<void> getPosition() async {
   Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
 }
-  // @override
+  @override
   Widget build(BuildContext context){
-    
-    return Scaffold(
-      appBar: AppBar(
-        //show the tittle in  middle of appbar
-        //show the positition of user
-        centerTitle: true,
-        backgroundColor: Colors.blueGrey,
-        foregroundColor: Colors.white,
-        title: Text('Map'),
-        elevation: 0.0,
+  return Scaffold(
+    body: GoogleMap(
+      initialCameraPosition: CameraPosition(
+        target: LatLng(45.521563, -122.677433),
+        zoom: 11,
       ),
-    );
+    )
+  );  
+    // return Scaffold(
+    //   appBar: AppBar(
+    //     //show the tittle in  middle of appbar
+    //     //show the positition of user
+    //     centerTitle: true,
+    //     backgroundColor: Colors.blueGrey,
+    //     foregroundColor: Colors.white,
+    //     title: Text('Map'),
+    //     elevation: 0.0,
+    //   ),
+    // );
   }
 
 
